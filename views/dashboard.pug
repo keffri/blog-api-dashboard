@@ -1,0 +1,12 @@
+extends layout 
+
+block content 
+    section(class="dashboard")
+        if user
+            nav(class="dashboard__nav")
+                a(href="/user/log-out") LOG OUT
+            p Welcome #{user.username}!
+        else
+            nav(class="dashboard__nav")
+                a(href="/user/log-in") LOG IN
+            p Welcome!
