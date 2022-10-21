@@ -14,7 +14,7 @@ PostSchema.virtual('postDate').get(function () {
 });
 
 PostSchema.virtual('url').get(function () {
-  return `/blog/posts/${this.id}`;
+  return `/dashboard/posts/${this.id}`;
 });
 
 module.exports = mongoose.model('Post', PostSchema);
