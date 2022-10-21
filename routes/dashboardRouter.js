@@ -11,6 +11,12 @@ router.get('/posts', dashboard_controller.getPosts);
 router.get('/posts/:post_id', dashboard_controller.getPost);
 
 // COMMENTS
+
+router.get(
+  '/posts/:post_id/comments/:comment_id/',
+  dashboard_controller.getComment
+);
+
 router.delete(
   '/posts/:post_id/comments/:comment_id/',
   dashboard_controller.deleteComment
