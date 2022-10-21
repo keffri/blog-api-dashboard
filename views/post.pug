@@ -1,0 +1,26 @@
+extends layout 
+
+block content
+    section(class="post")
+        nav(class="post__nav")
+            ul(class="post__nav--list")
+                li
+                    a(href="/dashboard") DASHBOARD 
+                li
+                    a(href="/dashboard/posts") VIEW POSTS
+            div(class="post__container")
+                h1(class="post__container--title") #{post.title}
+                p(class="post__container--post") #{post.post}
+                p #{post.postDate}
+            each comment in post.comments 
+                div(class="post__commentContainer")
+                    p(class="post__commentContainer--user") #{comment.user}
+                    p(class="post__commentContainer--text") #{comment.comment}
+                    hr
+                    p #{comment.commentDate}
+                    if comment.edited
+                        p Edited: #{comment.editedDate}
+                    form(class="post__commentContainer--buttons" action=`/dashboard/posts/${post._id}/comments/${comment._id}?_method=DELETE` method="POST")
+                        button(class="post__button") Delete
+                        button(class="post__button")
+                            a(href=`/dashboard/posts/${post._id}/comments/${comment._id}`) Edit
