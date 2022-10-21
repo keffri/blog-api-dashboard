@@ -2,7 +2,7 @@ extends layout
 
 block content
     section(class="comment")
-        form(class="comment__form" action="/blog/posts/${postID}/comments/${comment._id}?_method=PUT" method="POST")
+        form(class="comment__form" action=`/dashboard/posts/${postID}/comments/${comment._id}?_method=PUT` method="POST")
             p User: #{comment.user}
             if commentText
             if commentText
