@@ -1,5 +1,7 @@
 const Post = require('../models/postModel');
 const Comment = require('../models/commentModel');
+const { body, validationResult } = require('express-validator');
+const { DateTime } = require('luxon');
 
 /*** DASHBOARD ***/
 
@@ -66,6 +68,49 @@ exports.getComment = (req, res, next) => {
       }
     });
 };
+
+exports.postComment = [
+  body('comment')
+    .trim()
+    .isLength({ min: 4 })
+    .escape()
+    .withMessage('Comment is too short. (min: 4)')
+    .isLength({ max: 140 })
+    .escape()
+    .withMessage('Comment is too long. (max: 140)'),
+
+  async (req, res, next) => {
+    const post = await Post.findById(req.params.post_id)
+      .populate('comments')
+      .exec();
+
+    let commentText = req.body.comment;
+
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      return res.render('post', { post, commentText, errors: errors.array() });
+    }
+
+    const comments = post.comments;
+
+    const comment = new Comment({
+      user: req.user.username,
+      post: req.params.post_id,
+      comment: req.body.comment,
+    });
+
+    comment.save();
+
+    comments.push(comment);
+
+    Post.findByIdAndUpdate(req.params.post_id, { comments }, (err, post) => {
+      if (err) {
+        return next(err);
+      }
+      res.redirect(`/dashboard/posts/${req.params.post_id}`);
+    });
+  },
+];
 
 exports.deleteComment = async (req, res, next) => {
   const post = await Post.findById(req.params.post_id).exec();
