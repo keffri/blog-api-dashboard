@@ -27,7 +27,7 @@ block content
                         button(class="post__button") Delete
                         button(class="post__button")
                             a(href=`/dashboard/posts/${post._id}/comments/${comment._id}`) Edit
-            form(class="post__commentForm" action=`/blog/posts/${post._id}/comments` method="POST")
+            form(class="post__commentForm" action=`/dashboard/posts/${post._id}/comments` method="POST")
                 label(for="comment")
                 if commentText
                     textarea(class="post__textarea" name="comment" required="true" style="resize: none") #{commentText}
