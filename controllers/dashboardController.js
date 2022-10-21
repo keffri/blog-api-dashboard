@@ -112,6 +112,58 @@ exports.postComment = [
   },
 ];
 
+exports.putComment = [
+  body('comment')
+    .trim()
+    .isLength({ min: 4 })
+    .escape()
+    .withMessage('Comment is too short. (min: 4)')
+    .isLength({ max: 140 })
+    .escape()
+    .withMessage('Comment is too long. (max: 140)'),
+  async (req, res, next) => {
+    const comment = await Comment.findById(req.params.comment_id)
+      .populate('user')
+      .populate('comment')
+      .populate('date')
+      .exec();
+
+    let commentText = req.body.comment;
+    let postID = req.params.post_id;
+
+    const errors = validationResult(req);
+
+    if (!errors.isEmpty()) {
+      return res.render('comment', {
+        comment,
+        commentText,
+        postID,
+        errors: errors.array(),
+      });
+    }
+
+    Comment.findById(req.params.comment_id, (err, comment) => {
+      if (err) {
+        return next(err);
+      }
+
+      comment.comment = req.body.comment;
+      comment.edited = true;
+      comment.editedDate = DateTime.fromJSDate(new Date()).toFormat(
+        'DDDD, h:mm:ss, a'
+      );
+
+      comment.save((err) => {
+        if (err) {
+          return next(err);
+        }
+
+        res.redirect(`/dashboard/posts/${req.params.post_id}`);
+      });
+    });
+  },
+];
+
 exports.deleteComment = async (req, res, next) => {
   const post = await Post.findById(req.params.post_id).exec();
   const comments = post.comments;
