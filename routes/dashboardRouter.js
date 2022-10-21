@@ -17,6 +17,8 @@ router.get(
   dashboard_controller.getComment
 );
 
+router.post('/posts/:post_id/comments', dashboard_controller.postComment);
+
 router.delete(
   '/posts/:post_id/comments/:comment_id/',
   dashboard_controller.deleteComment
