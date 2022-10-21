@@ -50,6 +50,23 @@ exports.getPost = (req, res, next) => {
 
 /*** COMMENTS  ***/
 
+exports.getComment = (req, res, next) => {
+  Comment.findById(req.params.comment_id)
+    .populate('user')
+    .populate('post')
+    .populate('comment')
+    .exec((err, comment) => {
+      if (err) {
+        return next(err);
+      } else {
+        res.render('comment', {
+          comment,
+          postID: req.params.post_id,
+        });
+      }
+    });
+};
+
 exports.deleteComment = async (req, res, next) => {
   const post = await Post.findById(req.params.post_id).exec();
   const comments = post.comments;
