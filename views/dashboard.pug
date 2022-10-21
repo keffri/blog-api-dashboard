@@ -10,3 +10,11 @@ block content
             nav(class="dashboard__nav")
                 a(href="/user/log-in") LOG IN
             p Welcome!
+        div(class="dashboard__buttons")
+            if user
+                button
+                    a(href="/dashboard/posts") VIEW POSTS
+                button
+                    a(href="/dashboard/create") CREATE POST
+            else
+                p Please visit the regular blog to login, view posts and comment.
