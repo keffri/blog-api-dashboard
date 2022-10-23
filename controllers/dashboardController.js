@@ -50,6 +50,44 @@ exports.getPost = (req, res, next) => {
     });
 };
 
+exports.getCreate = (req, res, next) => {
+  return res.render('create');
+};
+
+exports.postPost = [
+  body('title')
+    .trim()
+    .isLength({ min: 4 })
+    .escape()
+    .withMessage('Title is too short. (min: 4')
+    .isLength({ max: 30 })
+    .escape()
+    .withMessage('Title is too long. (max: 30)'),
+  body('content')
+    .trim()
+    .isLength({ min: 1 })
+    .escape()
+    .withMessage('Please enter text content.'),
+  (req, res, next) => {
+    let post = { title: req.body.title, post: req.body.content };
+
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      return res.render('create', { post, errors: errors.array() });
+    }
+
+    new Post({
+      title: req.body.title,
+      post: req.body.content,
+    }).save((err) => {
+      if (err) {
+        return next(err);
+      }
+      res.redirect('/dashboard');
+    });
+  },
+];
+
 /*** COMMENTS  ***/
 
 exports.getComment = (req, res, next) => {
