@@ -1,0 +1,16 @@
+extends layout 
+
+block content 
+    section(class="create")
+        form(class="create__form" action="/dashboard/posts" method="POST")
+            if post
+                label(for="title") Title:
+                    input(class="create__input" type="text" name="title" required="true" value=`${post.title}`) 
+                label(for="content") Content:
+                    textarea(class="create__textarea" name="content" required="true" style="resize: none") #{post.content}
+            else 
+                label(for="title") Title:
+                    input(class="create__input" type="text" name="title" required="true")
+                label(for="content") Content:
+                    textarea(class="create__textarea" name="content" required="true" style="resize: none")
+            button(class="create__button") Create
