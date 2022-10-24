@@ -59,3 +59,37 @@ html, body {
 	background-color: #161616;
 	color: #D7D7D7;
 }
+
+
+/*** DASHBOARD ***/
+
+.dashboard {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-evenly;
+
+    &__nav {       
+		background-color: #D7D7D7;
+		padding: 0.5rem 1rem;
+		border-radius: 5px;
+
+        a {
+            color: #161616;
+            text-decoration: none;
+            
+            &:hover {
+                text-decoration: underline;
+            }
+        }
+    }
+
+    &__text {
+        font-size: 3rem;
+
+        &--msg {
+            font-size: 1.25rem;
+        }
+    }
+}
