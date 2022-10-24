@@ -19,6 +19,8 @@ router.post('/posts/', dashboard_controller.postPost);
 
 router.put('/posts/:post_id/edit', dashboard_controller.putPost);
 
+router.delete('/posts/:post_id', dashboard_controller.deletePost);
+
 // COMMENTS
 
 router.get(
