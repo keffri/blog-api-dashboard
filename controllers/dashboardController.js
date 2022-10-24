@@ -160,6 +160,34 @@ exports.putPost = [
   },
 ];
 
+exports.deletePost = async (req, res, next) => {
+  const post = await Post.findById(req.params.post_id).exec();
+  const comments = post.comments.map((comment) => {
+    return comment._id.toString();
+  });
+
+  Comment.deleteMany(
+    {
+      _id: {
+        $in: [...comments],
+      },
+    },
+    (err, result) => {
+      if (err) {
+        return next(err);
+      }
+    }
+  );
+
+  Post.findByIdAndDelete(req.params.post_id, (err, result) => {
+    if (err) {
+      return next(err);
+    } else {
+      res.redirect('/dashboard/posts');
+    }
+  });
+};
+
 /*** COMMENTS  ***/
 
 exports.getComment = (req, res, next) => {
@@ -293,7 +321,7 @@ exports.deleteComment = async (req, res, next) => {
 
   Comment.findByIdAndDelete(req.params.comment_id, (err, result) => {
     if (err) {
-      next(err);
+      return next(err);
     } else {
       res.redirect(`/dashboard/posts/${req.params.post_id}`);
     }
