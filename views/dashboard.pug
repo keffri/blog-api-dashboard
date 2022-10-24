@@ -5,11 +5,11 @@ block content
         if user
             nav(class="dashboard__nav")
                 a(href="/user/log-out") LOG OUT
-            p Welcome #{user.username}!
+            p(class="dashboard__text") Welcome #{user.username}!
         else
             nav(class="dashboard__nav")
                 a(href="/user/log-in") LOG IN
-            p Welcome!
+            p(class="dashboard__text") Welcome!
         div(class="dashboard__buttons")
             if user
                 button
@@ -17,4 +17,4 @@ block content
                 button
                     a(href="/dashboard/posts/create") CREATE POST
             else
-                p Please visit the regular blog to login, view posts and comment.
+                p(class="dashboard__text--msg") Please visit the regular blog to login, view posts and comment.
