@@ -5,7 +5,6 @@ block content
         form(class="comment__form" action=`/dashboard/posts/${postID}/comments/${comment._id}?_method=PUT` method="POST")
             p User: #{comment.user}
             if commentText
-            if commentText
                 textarea(name="comment" required="true" style="resize: none") #{commentText}
             else 
                 textarea(name="comment" required="true" style="resize: none") #{comment.comment}
