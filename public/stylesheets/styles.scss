@@ -60,6 +60,32 @@ html, body {
 	color: #D7D7D7;
 }
 
+/*** MIXINS ***/
+
+@mixin button-styles {
+    background-color: #161616;
+    border: 1px solid #D7D7D7;
+    border-radius: 5px;
+    padding: 0.5rem 1rem;
+    color: #D7D7D7;
+    cursor: pointer;
+    transition: all 0.3s;
+
+    &:hover {
+        color: #161616;
+        background-color: #D7D7D7;
+
+        a {
+            color: #161616;
+        }
+    }		
+
+    a {
+        color: #D7D7D7;
+        text-decoration: none;				
+    }
+}
+
 
 /*** DASHBOARD ***/
 
@@ -91,6 +117,13 @@ html, body {
         &--msg {
             font-size: 1.25rem;
         }
+    }
+
+    &__button  {
+        @include button-styles;
+        margin: 0 2rem;
+        font-weight: 800;
+        font-size: 1.5rem;
     }
 }
 
@@ -126,5 +159,9 @@ html, body {
         display: flex;
         flex-direction: column;
         gap: .5rem;
+    }
+
+    &__button {
+        @include button-styles;
     }
 }

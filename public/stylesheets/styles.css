@@ -65,6 +65,7 @@ html, body {
   color: #D7D7D7;
 }
 
+/*** MIXINS ***/
 /*** DASHBOARD ***/
 .dashboard {
   height: 100%;
@@ -90,6 +91,29 @@ html, body {
 }
 .dashboard__text--msg {
   font-size: 1.25rem;
+}
+.dashboard__button {
+  background-color: #161616;
+  border: 1px solid #D7D7D7;
+  border-radius: 5px;
+  padding: 0.5rem 1rem;
+  color: #D7D7D7;
+  cursor: pointer;
+  transition: all 0.3s;
+  margin: 0 2rem;
+  font-weight: 800;
+  font-size: 1.5rem;
+}
+.dashboard__button:hover {
+  color: #161616;
+  background-color: #D7D7D7;
+}
+.dashboard__button:hover a {
+  color: #161616;
+}
+.dashboard__button a {
+  color: #D7D7D7;
+  text-decoration: none;
 }
 
 /*** LOGIN ***/
@@ -119,6 +143,26 @@ html, body {
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
+}
+.login__button {
+  background-color: #161616;
+  border: 1px solid #D7D7D7;
+  border-radius: 5px;
+  padding: 0.5rem 1rem;
+  color: #D7D7D7;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+.login__button:hover {
+  color: #161616;
+  background-color: #D7D7D7;
+}
+.login__button:hover a {
+  color: #161616;
+}
+.login__button a {
+  color: #D7D7D7;
+  text-decoration: none;
 }
 
 /*# sourceMappingURL=styles.css.map */
