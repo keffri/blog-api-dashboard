@@ -12,6 +12,8 @@ block content
                 h1(class="post__container--title") #{post.title}
                 p(class="post__container--post") #{post.post}
                 p #{post.postDate}
+                if post.edited
+                    p Edited: #{post.editedDate}
             div(class="post__buttons")
                 button(class="post__button") DELETE
                 button(class="post__button")
