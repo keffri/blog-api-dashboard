@@ -13,7 +13,11 @@ router.get('/posts/create', dashboard_controller.getCreate);
 
 router.get('/posts/:post_id', dashboard_controller.getPost);
 
+router.get('/posts/:post_id/edit', dashboard_controller.getEdit);
+
 router.post('/posts/', dashboard_controller.postPost);
+
+router.put('/posts/:post_id/edit', dashboard_controller.putPost);
 
 // COMMENTS
 
