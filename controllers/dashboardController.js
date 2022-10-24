@@ -88,6 +88,78 @@ exports.postPost = [
   },
 ];
 
+exports.getEdit = (req, res, next) => {
+  Post.findById(req.params.post_id)
+    .populate('title')
+    .populate('post')
+    .exec((err, post) => {
+      if (err) {
+        return next(err);
+      } else {
+        res.render('edit', {
+          post,
+          postID: req.params.post_id,
+        });
+      }
+    });
+};
+
+exports.putPost = [
+  body('title')
+    .trim()
+    .isLength({ min: 4 })
+    .escape()
+    .withMessage('Title is too short. (min: 4')
+    .isLength({ max: 30 })
+    .escape()
+    .withMessage('Title is too long. (max: 30)'),
+  body('post')
+    .trim()
+    .isLength({ min: 1 })
+    .escape()
+    .withMessage('Please enter text content.'),
+  async (req, res, next) => {
+    const post = await Post.findById(req.params.post_id)
+      .populate('title')
+      .populate('post')
+      .exec();
+
+    let postID = req.params.post_id;
+
+    const errors = validationResult(req);
+    console.log(post);
+    console.log(errors.array());
+    if (!errors.isEmpty()) {
+      return res.render('create', {
+        post,
+        postID,
+        errors: errors.array(),
+      });
+    }
+
+    Post.findById(req.params.post_id, (err, post) => {
+      if (err) {
+        return next(err);
+      }
+
+      post.title = req.body.title;
+      post.post = req.body.post;
+      post.edited = true;
+      post.editedDate = DateTime.fromJSDate(new Date()).toFormat(
+        'DDDD, h:mm:ss, a'
+      );
+
+      post.save((err) => {
+        if (err) {
+          return next(err);
+        }
+      });
+
+      res.redirect(`/dashboard/posts/${req.params.post_id}`);
+    });
+  },
+];
+
 /*** COMMENTS  ***/
 
 exports.getComment = (req, res, next) => {
