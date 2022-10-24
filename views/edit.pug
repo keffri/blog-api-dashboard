@@ -1,0 +1,10 @@
+extends layout 
+
+block content 
+    section(class="edit")
+        form(class="edit__form" action=`/dashboard/posts/${postID}/edit?_method=PUT` method="POST")
+            label(for="title") Title:
+                input(class="edit__input" type="text" name="title" required="true" value=`${post.title}`) 
+            label(for="post") Post:
+                textarea(class="edit__textarea" name="post" required="true" style="resize: none") #{post.post}
+            button(class="edit__button") Submit
