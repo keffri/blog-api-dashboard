@@ -6,7 +6,8 @@ block content
             a(href="/dashboard") DASHBOARD
         each post in posts_list
             div(class="posts__container")
-                a(class="posts__link" href=post.url) #{post.title}
-                p(class="posts__post") #{post.post}
+                h1(class="posts__title") #{post.title}
                 p(class="posts__date") #{post.postDate}
                 p Comments: #{post.comments.length}
+                button(class="posts__button")
+                    a(href=post.url) VIEW POST
