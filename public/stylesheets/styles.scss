@@ -166,47 +166,6 @@ html, body {
     }
 }
 
-/*** CREATE ***/
-
-.create {
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: space-evenly;
-
-    &__nav {
-        background-color: #D7D7D7;
-		padding: 0.5rem 1rem;
-		border-radius: 5px;
-
-        a {
-            color: #161616;
-            text-decoration: none;
-            
-            &:hover {
-                text-decoration: underline;
-            }
-        }
-    }
-
-    &__form {
-        display: flex;
-        flex-direction: column;
-        gap: 1rem;
-    }
-
-    &__textarea {
-        width: 350px;
-        height: 250px;
-    }
-
-    &__button {
-        @include button-styles;
-    }
-
-}
-
 /*** POSTS ***/
 
 .posts {	
@@ -258,6 +217,137 @@ html, body {
 	&__date {
 		padding-bottom: 1rem;
 	}
+
+    &__button {
+        @include button-styles;
+    }
+}
+
+/*** POST ***/
+
+.post {	
+    height: 100%;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+    gap: 1rem;
+ 
+	
+	&__nav {
+
+		padding-top: 3rem;
+		&--list {
+			a {
+				color: #161616;
+				text-decoration: none;
+				
+				&:hover {
+					text-decoration: underline;
+				}
+			}
+
+			min-width: 350px;
+			background-color: #D7D7D7;
+			display: flex;
+			justify-content: space-between;
+			gap: 1em;
+			padding: 0.5rem 1rem;
+			border-radius: 5px;
+		}
+	}
+
+	&__container {
+		display: flex;
+		flex-direction: column;
+		gap: 1rem;
+		border: 2px solid #D7D7D7;
+		padding: .75rem 1.5rem;
+
+		&--title {
+			align-self: center;
+			font-size: 2rem;
+			text-decoration: underline;
+			padding-bottom: 2rem;
+		}
+
+		&--post {
+			font-size: 1.25rem;
+		}
+	}
+
+	&__commentContainer {
+		width: 350px;
+		border: 1px solid #D7D7D7;
+		padding: 1rem;
+		display: flex;		
+		flex-direction: column;
+		gap: 0.5rem;
+		
+	
+		&--user {			
+			text-decoration: underline;
+		}
+
+		&--text {
+			word-wrap: break-word;
+		}	
+	}
+    
+    &__buttons {
+        display: flex;
+        justify-content: space-evenly
+    }
+
+	&__button {
+		@include button-styles;
+	}
+
+	&__commentForm {
+		display: flex;
+		flex-direction: column;
+	}
+
+	&__textarea {
+		width: 350px;
+		height: 100px;
+		margin-bottom: 1rem;
+	}
+}
+
+/*** postForm ***/
+
+.postForm {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-evenly;
+
+    &__nav {
+        background-color: #D7D7D7;
+		padding: 0.5rem 1rem;
+		border-radius: 5px;
+
+        a {
+            color: #161616;
+            text-decoration: none;
+            
+            &:hover {
+                text-decoration: underline;
+            }
+        }
+    }
+
+    &__form {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+    }
+
+    &__textarea {
+        width: 350px;
+        height: 250px;
+    }
 
     &__button {
         @include button-styles;
