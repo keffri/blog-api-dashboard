@@ -35,6 +35,7 @@ exports.getPost = (req, res, next) => {
     .populate('date')
     .populate('comments')
     .exec((err, post) => {
+      console.log(post);
       if (err) {
         return next(err);
       }
@@ -58,15 +59,12 @@ exports.postPost = [
   body('title')
     .trim()
     .isLength({ min: 4 })
-    .escape()
     .withMessage('Title is too short. (min: 4')
     .isLength({ max: 30 })
-    .escape()
     .withMessage('Title is too long. (max: 30)'),
   body('content')
     .trim()
     .isLength({ min: 1 })
-    .escape()
     .withMessage('Please enter text content.'),
   (req, res, next) => {
     let post = { title: req.body.title, post: req.body.content };
@@ -83,7 +81,7 @@ exports.postPost = [
       if (err) {
         return next(err);
       }
-      res.redirect('/dashboard');
+      res.redirect('/dashboard/posts');
     });
   },
 ];
@@ -108,15 +106,12 @@ exports.putPost = [
   body('title')
     .trim()
     .isLength({ min: 4 })
-    .escape()
     .withMessage('Title is too short. (min: 4')
     .isLength({ max: 30 })
-    .escape()
     .withMessage('Title is too long. (max: 30)'),
   body('post')
     .trim()
     .isLength({ min: 1 })
-    .escape()
     .withMessage('Please enter text content.'),
   async (req, res, next) => {
     const post = await Post.findById(req.params.post_id)
@@ -211,10 +206,8 @@ exports.postComment = [
   body('comment')
     .trim()
     .isLength({ min: 4 })
-    .escape()
     .withMessage('Comment is too short. (min: 4)')
     .isLength({ max: 140 })
-    .escape()
     .withMessage('Comment is too long. (max: 140)'),
 
   async (req, res, next) => {
@@ -254,10 +247,8 @@ exports.putComment = [
   body('comment')
     .trim()
     .isLength({ min: 4 })
-    .escape()
     .withMessage('Comment is too short. (min: 4)')
     .isLength({ max: 140 })
-    .escape()
     .withMessage('Comment is too long. (max: 140)'),
   async (req, res, next) => {
     const comment = await Comment.findById(req.params.comment_id)
