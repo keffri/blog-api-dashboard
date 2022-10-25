@@ -35,7 +35,6 @@ exports.getPost = (req, res, next) => {
     .populate('date')
     .populate('comments')
     .exec((err, post) => {
-      console.log(post);
       if (err) {
         return next(err);
       }
