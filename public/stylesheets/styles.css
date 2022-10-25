@@ -215,4 +215,68 @@ html, body {
   text-decoration: none;
 }
 
+/*** POSTS ***/
+.posts {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2rem;
+}
+.posts__nav {
+  margin-top: 3rem;
+  background-color: #D7D7D7;
+  display: flex;
+  justify-content: space-between;
+  gap: 1em;
+  padding: 0.5rem 1rem;
+  border-radius: 5px;
+}
+.posts__nav a {
+  color: #161616;
+  text-decoration: none;
+}
+.posts__nav a:hover {
+  text-decoration: underline;
+}
+.posts__container {
+  border: 2px solid #D7D7D7;
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+}
+.posts__title {
+  font-size: 2rem;
+  text-decoration: underline;
+  padding-bottom: 1rem;
+}
+.posts__post {
+  padding-bottom: 1rem;
+}
+.posts__date {
+  padding-bottom: 1rem;
+}
+.posts__button {
+  background-color: #161616;
+  border: 1px solid #D7D7D7;
+  border-radius: 5px;
+  padding: 0.5rem 1rem;
+  color: #D7D7D7;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+.posts__button:hover {
+  color: #161616;
+  background-color: #D7D7D7;
+}
+.posts__button:hover a {
+  color: #161616;
+}
+.posts__button a {
+  color: #D7D7D7;
+  text-decoration: none;
+}
+
 /*# sourceMappingURL=styles.css.map */
