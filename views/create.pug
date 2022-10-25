@@ -1,12 +1,12 @@
 extends layout 
 
 block content 
-    section(class="create")
-        nav(class="create__nav")
+    section(class="postForm")
+        nav(class="postForm__nav")
             a(href="/dashboard") DASHBOARD
-        form(class="create__form" action="/dashboard/posts" method="POST")
+        form(class="postForm__form" action="/dashboard/posts" method="POST")
             label(for="title") Title:
-            input(class="create__input" type="text" name="title" required="true")
+            input(class="postForm__input" type="text" name="title" required="true")
             label(for="content") Content:
-            textarea(class="create__textarea" name="content" required="true" style="resize: none")
-            button(class="create__button") Create
+            textarea(class="postForm__textarea" name="content" required="true" style="resize: none")
+            button(class="postForm__button") Create

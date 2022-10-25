@@ -1,10 +1,12 @@
 extends layout 
 
 block content 
-    section(class="edit")
-        form(class="edit__form" action=`/dashboard/posts/${postID}/edit?_method=PUT` method="POST")
+    section(class="postForm")
+        nav(class="postForm__nav")
+            a(href="/dashboard") DASHBOARD
+        form(class="postForm__form" action=`/dashboard/posts/${postID}/edit?_method=PUT` method="POST")
             label(for="title") Title:
-                input(class="edit__input" type="text" name="title" required="true" value=`${post.title}`) 
+            input(class="postForm__input" type="text" name="title" required="true" value=`${post.title}`) 
             label(for="post") Post:
-                textarea(class="edit__textarea" name="post" required="true" style="resize: none") #{post.post}
-            button(class="edit__button") Submit
+            textarea(class="postForm__textarea" name="post" required="true" style="resize: none") #{post.post}
+            button(class="postForm__button") Submit
