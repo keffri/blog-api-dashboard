@@ -329,6 +329,9 @@ html, body {
   justify-content: space-evenly;
 }
 .postForm__nav {
+  min-width: 300px;
+  display: flex;
+  justify-content: space-between;
   background-color: #D7D7D7;
   padding: 0.5rem 1rem;
   border-radius: 5px;
@@ -366,6 +369,56 @@ html, body {
   color: #161616;
 }
 .postForm__button a {
+  color: #D7D7D7;
+  text-decoration: none;
+}
+
+/*** COMMENT ***/
+.comment {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-evenly;
+}
+.comment__nav {
+  min-width: 300px;
+  display: flex;
+  justify-content: space-between;
+  background-color: #D7D7D7;
+  padding: 0.5rem 1rem;
+  border-radius: 5px;
+}
+.comment__nav a {
+  color: #161616;
+  text-decoration: none;
+}
+.comment__nav a:hover {
+  text-decoration: underline;
+}
+.comment__form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.25rem;
+}
+.comment__button {
+  background-color: #161616;
+  border: 1px solid #D7D7D7;
+  border-radius: 5px;
+  padding: 0.5rem 1rem;
+  color: #D7D7D7;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+.comment__button:hover {
+  color: #161616;
+  background-color: #D7D7D7;
+}
+.comment__button:hover a {
+  color: #161616;
+}
+.comment__button a {
   color: #D7D7D7;
   text-decoration: none;
 }
