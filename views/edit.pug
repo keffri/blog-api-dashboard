@@ -4,6 +4,7 @@ block content
     section(class="postForm")
         nav(class="postForm__nav")
             a(href="/dashboard") DASHBOARD
+            a(href="/dashboard/posts") VIEW POSTS
         form(class="postForm__form" action=`/dashboard/posts/${postID}/edit?_method=PUT` method="POST")
             label(for="title") Title:
             input(class="postForm__input" type="text" name="title" required="true" value=`${post.title}`) 
