@@ -2,6 +2,9 @@ extends layout
 
 block content
     section(class="comment")
+        nav(class="comment__nav")
+            a(href="/dashboard") DASHBOARD
+            a(href="/dashboard/posts") VIEW POSTS
         form(class="comment__form" action=`/dashboard/posts/${postID}/comments/${comment._id}?_method=PUT` method="POST")
             p User: #{comment.user}
             if commentText
