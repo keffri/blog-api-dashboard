@@ -23,7 +23,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
 const mongoose = require('mongoose');
-const mongoDB = process.env.MONGODB_APPCODE;
+const mongoDB = process.env.MONGODB_URI || process.env.MONGODB_APPCODE;
 mongoose.connect(mongoDB, {
   useUnifiedTopology: true,
 });
