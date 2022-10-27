@@ -1,13 +1,24 @@
 extends layout 
 
 block content
-    section(class="posts")
-        nav(class="posts__nav")
-            a(href="/dashboard") DASHBOARD
-        each post in posts_list
-            div(class="posts__container")
-                h1(class="posts__title") #{post.title}
-                p(class="posts__date") #{post.postDate}
-                p Comments: #{post.comments.length}
-                button(class="posts__button")
-                    a(href=post.url) VIEW POST
+    if !user
+        section(class="noAccess")
+            nav(class="noAccess__nav")
+                a(href="/dashboard") DASHBOARD
+            p(class="noAccess__msg") Please visit the regular blog <a href="https://keffri-blog-api.herokuapp.com/blog">here</a> to view posts and comment.
+    else if !user.admin
+        section(class="noAccess")
+            nav(class="noAccess__nav")
+                a(href="/dashboard") DASHBOARD
+            p(class="noAccess__msg") Please visit the regular blog <a href="https://keffri-blog-api.herokuapp.com/blog">here</a> to view posts and comment.
+    else 
+        section(class="posts")    
+            nav(class="posts__nav")
+                a(href="/dashboard") DASHBOARD
+            each post in posts_list
+                div(class="posts__container")
+                    h1(class="posts__title") #{post.title}
+                    p(class="posts__date") #{post.postDate}
+                    p Comments: #{post.comments.length}
+                    button(class="posts__button")
+                        a(href=post.url) VIEW POST

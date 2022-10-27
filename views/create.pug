@@ -1,12 +1,24 @@
 extends layout 
 
 block content 
-    section(class="postForm")
-        nav(class="postForm__nav")
-            a(href="/dashboard") DASHBOARD
-        form(class="postForm__form" action="/dashboard/posts" method="POST")
-            label(for="title") Title:
-            input(class="postForm__input" type="text" name="title" required="true")
-            label(for="content") Content:
-            textarea(class="postForm__textarea" name="content" required="true" style="resize: none")
-            button(class="postForm__button") Create
+    if !user
+        section(class="noAccess")
+            nav(class="noAccess__nav")
+                a(href="/dashboard") DASHBOARD
+            p(class="noAccess__msg") Please visit the regular blog <a href="https://keffri-blog-api.herokuapp.com/blog">here</a> to view posts and comment.
+    else if !user.admin
+        section(class="noAccess")
+            nav(class="noAccess__nav")
+                a(href="/dashboard") DASHBOARD
+            p(class="noAccess__msg") Please visit the regular blog <a href="https://keffri-blog-api.herokuapp.com/blog">here</a> to view posts and comment.
+    else 
+        section(class="postForm")
+            nav(class="postForm__nav")
+                a(href="/dashboard") DASHBOARD
+            form(class="postForm__form" action="/dashboard/posts" method="POST")
+                label(for="title") Title:
+                input(class="postForm__input" type="text" name="title" required="true")
+                label(for="content") Content:
+                textarea(class="postForm__textarea" name="content" required="true" style="resize: none")
+                button(class="postForm__button") Create
+    

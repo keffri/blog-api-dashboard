@@ -2,12 +2,17 @@ extends layout
 
 block content
     section(class="login")
-        nav(class="login__nav")
-            a(href="/dashboard") DASHBOARD
-        h1(class="login__title") LOGIN
-        form(class="login__form" action="" method="POST")
-            label(for="username") Username:
-            input(name="username" type="text" required="true")
-            label(for="password") Password:
-            input(name="password" type="password" required="true")
-            button(class="login__button") Log In
+        if !user
+            nav(class="login__nav")
+                a(href="/dashboard") DASHBOARD
+            h1(class="login__title") LOGIN
+            form(class="login__form" action="" method="POST")
+                label(for="username") Username:
+                input(name="username" type="text" required="true")
+                label(for="password") Password:
+                input(name="password" type="password" required="true")
+                button(class="login__button") Log In
+        else
+            nav(class="login__nav")
+                a(href="/dashboard") DASHBOARD
+            p You are already logged in.

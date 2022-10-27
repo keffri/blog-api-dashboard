@@ -11,10 +11,12 @@ block content
                 a(href="/user/log-in") LOG IN
             p(class="dashboard__text") Welcome!
         div(class="dashboard__buttons")
-            if user
+            if !user
+                p(class="noAccess__msg") Please visit the regular blog <a href="https://keffri-blog-api.herokuapp.com/blog">here</a> to view posts and comment.
+            else if !user.admin
+                p(class="noAccess__msg") Please visit the regular blog <a href="https://keffri-blog-api.herokuapp.com/blog">here</a> to view posts and comment.
+            else
                 button(class="dashboard__button")
                     a(href="/dashboard/posts") VIEW POSTS
                 button(class="dashboard__button")
                     a(href="/dashboard/posts/create") CREATE POST
-            else
-                p(class="dashboard__text--msg") Please visit the regular blog to view posts and comment.

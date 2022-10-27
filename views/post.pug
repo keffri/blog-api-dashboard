@@ -1,47 +1,58 @@
 extends layout 
 
-block content
-    section(class="post")
-        nav(class="post__nav")
-            ul(class="post__nav--list")
-                li
-                    a(href="/dashboard") DASHBOARD 
-                li
-                    a(href="/dashboard/posts") VIEW POSTS
-        div(class="post__container")
-            h1(class="post__container--title") #{post.title}
-            p(class="post__container--post") #{post.post}
-            p #{post.postDate}
-            if post.edited
-                p Edited: #{post.editedDate}
-            div(class="post__buttons")
-                button(class="post__button")
-                        a(href=`/dashboard/posts/${post._id}/edit`) EDIT
-                form(action=`/dashboard/posts/${post._id}?_method=DELETE` method="POST")
-                    button(class="post__button") DELETE
-        each comment in post.comments 
-            div(class="post__commentContainer")
-                if comment.user === "keffri"
-                    p(class="post__commentContainer--user" style="color: red") #{comment.user}
-                else
-                    p(class="post__commentContainer--user") #{comment.user}
-                p(class="post__commentContainer--text") #{comment.comment}
-                hr
-                p #{comment.commentDate}
-                if comment.edited
-                    p Edited: #{comment.editedDate}
+block content 
+    if !user
+        section(class="noAccess")
+            nav(class="noAccess__nav")
+                a(href="/dashboard") DASHBOARD
+            p(class="noAccess__msg") Please visit the regular blog <a href="https://keffri-blog-api.herokuapp.com/blog">here</a> to view posts and comment.
+    else if !user.admin
+        section(class="noAccess")
+            nav(class="noAccess__nav")
+                a(href="/dashboard") DASHBOARD
+            p(class="noAccess__msg") Please visit the regular blog <a href="https://keffri-blog-api.herokuapp.com/blog">here</a> to view posts and comment.
+    else 
+        section(class="post")
+            nav(class="post__nav")
+                ul(class="post__nav--list")
+                    li
+                        a(href="/dashboard") DASHBOARD 
+                    li
+                        a(href="/dashboard/posts") VIEW POSTS
+            div(class="post__container")
+                h1(class="post__container--title") #{post.title}
+                p(class="post__container--post") #{post.post}
+                p #{post.postDate}
+                if post.edited
+                    p Edited: #{post.editedDate}
                 div(class="post__buttons")
                     button(class="post__button")
-                        a(href=`/dashboard/posts/${post._id}/comments/${comment._id}`) EDIT
-                    form(class="post__comment   Container--buttons" action=`/dashboard/posts/${post._id}/comments/${comment._id}?_method=DELETE` method="POST")
+                            a(href=`/dashboard/posts/${post._id}/edit`) EDIT
+                    form(action=`/dashboard/posts/${post._id}?_method=DELETE` method="POST")
                         button(class="post__button") DELETE
-        form(class="post__commentForm" action=`/dashboard/posts/${post._id}/comments` method="POST")
-            label(for="comment")
-            if commentText
-                textarea(class="post__textarea" name="comment" required="true" style="resize: none") #{commentText}
-            else
-                textarea(class="post__textarea"  name="comment" required="true" style="resize: none")
-            if errors
-                each error in errors
-                    p(style="color: red") - #{error.param}: #{error.msg}
-            button(class="post__button") Submit
+            each comment in post.comments 
+                div(class="post__commentContainer")
+                    if comment.user === "keffri"
+                        p(class="post__commentContainer--user" style="color: red") #{comment.user}
+                    else
+                        p(class="post__commentContainer--user") #{comment.user}
+                    p(class="post__commentContainer--text") #{comment.comment}
+                    hr
+                    p #{comment.commentDate}
+                    if comment.edited
+                        p Edited: #{comment.editedDate}
+                    div(class="post__buttons")
+                        button(class="post__button")
+                            a(href=`/dashboard/posts/${post._id}/comments/${comment._id}`) EDIT
+                        form(class="post__comment   Container--buttons" action=`/dashboard/posts/${post._id}/comments/${comment._id}?_method=DELETE` method="POST")
+                            button(class="post__button") DELETE
+            form(class="post__commentForm" action=`/dashboard/posts/${post._id}/comments` method="POST")
+                label(for="comment")
+                if commentText
+                    textarea(class="post__textarea" name="comment" required="true" style="resize: none") #{commentText}
+                else
+                    textarea(class="post__textarea"  name="comment" required="true" style="resize: none")
+                if errors
+                    each error in errors
+                        p(style="color: red") - #{error.param}: #{error.msg}
+                button(class="post__button") Submit
